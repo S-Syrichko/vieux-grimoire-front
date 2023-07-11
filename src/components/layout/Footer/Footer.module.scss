@@ -1,0 +1,74 @@
+@import "../../../styles/utils/variables";
+
+.footer {
+  height: 112px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  p {
+    font-size: 14px;
+    font-family: $font-secondary;
+    margin: 0;
+  }
+  .adress,
+  .copyright,
+  .mentions {
+    width: 33%;
+    height: 100%;
+    display: flex;
+  }
+  .adress {
+    padding: 0 40px;
+    align-items: center;
+    justify-content: space-around;
+
+    .imageContainer {
+      position: relative;
+      display: inline-block;
+      img {
+        width: 80px;
+        height: 80px;
+        border-radius: 14px;
+      }
+      &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        border: 1px solid #fff;
+        background-color: #d9a963;
+      }
+    }
+    .adressContainer {
+      a {
+        font-size: 14px;
+        font-family: $font-secondary;
+        color: #796157;
+        margin-top: 6px;
+      }
+    }
+    .phone {
+      align-self: end;
+      padding-bottom: 26px;
+    }
+  }
+  .copyright {
+    justify-content: center;
+    align-items: end;
+    p {
+      margin-bottom: 30px;
+    }
+  }
+  .mentions {
+    justify-content: end;
+    align-items: end;
+    p {
+      margin-right: 60px;
+      padding-bottom: 30px;
+    }
+  }
+}

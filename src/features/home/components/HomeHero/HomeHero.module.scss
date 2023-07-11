@@ -1,0 +1,24 @@
+.hero {
+    position: relative;
+    margin-bottom: 120px;
+    svg{
+        position: absolute;
+        top: 30%;
+        left: 10%;
+    }
+    h1{
+        margin: 0;
+        color: #796157;
+        font-size: 44px;
+        font-style: italic;
+        font-weight: 400;  
+    }
+    p {
+        margin-top: 11px;
+        margin-bottom: 28px;
+        font-size: 28px;
+    }
+    button {
+        position: relative;
+    }
+}

@@ -1,0 +1,24 @@
+.card {
+  max-width: 350px;
+  display: flex;
+  justify-content: center;
+  margin: 8% 0;
+  .description {
+    margin-top: 30px;
+    margin-left: 20px;
+    text-align: left;
+    h2 {
+      font-size: 18px;
+      margin-top: 14px;
+      margin-bottom: 8px;
+    }
+    p {
+      font-size: 14px;
+      color: #796157;
+      margin: 8px 0;
+    }
+    &Text {
+      max-height: 125px;
+    }
+  }
+}
