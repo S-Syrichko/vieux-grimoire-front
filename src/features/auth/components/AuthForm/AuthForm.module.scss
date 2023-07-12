@@ -1,0 +1,40 @@
+@import "../../../../styles/utils/variables";
+
+.formContainer{
+    background-color: #f9f3ee;
+    border-radius: 12px;
+    box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.06);
+    width: fit-content;
+    height: fit-content;
+    margin: 50px auto;
+    padding: 50px 0;
+    .inputWrapper {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        margin-bottom: 35px;
+        padding: 0 60px;
+        label {
+            font-family: $font-secondary;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        input {
+            border-radius: 3px;
+            border: 1px solid #F2E3CE;
+            color: inherit;
+            background: #FFF;
+            font-size: 25px;
+            padding: 15px 25px;
+        }
+    }
+    .actionContainer {
+        margin-top: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        p {
+            margin: 0 18px;
+        }
+    }
+}
