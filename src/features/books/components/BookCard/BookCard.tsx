@@ -8,7 +8,7 @@ interface Book {
   title: string;
   author: string;
   year: number;
-  category: string;
+  genre: string;
   rating: number;
   image: string;
 }
@@ -18,7 +18,7 @@ const book: Book = {
   title: "Le Seigneur des anneaux",
   author: "J. R. R. Tolkien",
   year: 1954,
-  category: "Fantasy",
+  genre: "Fantasy",
   rating: 3,
   image: placeholder,
 };
@@ -28,12 +28,12 @@ const BookCard = () => {
     <Link to={`/books/${book.id}`} className={styles.card}>
       <img src={book.image} alt="" />
       <div className={styles.description}>
-        <Rating rating={book.rating} />
+        <Rating rating={book.rating} size="small" />
         <div className={styles.descriptionText}>
           <h2>{book.title}</h2>
           <p>{book.author}</p>
           <p>{book.year}</p>
-          <p>{book.category}</p>
+          <p>{book.genre}</p>
         </div>
       </div>
     </Link>

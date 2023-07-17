@@ -1,4 +1,4 @@
-import styles from "./AuthForm.module.scss";
+import styles from "../../../../styles/layouts/Form.module.scss";
 
 const AuthForm = () => {
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
