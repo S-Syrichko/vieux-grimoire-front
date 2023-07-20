@@ -1,7 +1,10 @@
+import { useQueryClient } from "react-query";
 import { NavLink } from "react-router-dom";
 import styles from "./AppNavigation.module.scss";
 
 const AppNavigation = () => {
+  const queryClient = useQueryClient();
+  const userId = queryClient.getQueryData("userId");
   return (
     <nav className={styles.nav}>
       <NavLink
@@ -20,7 +23,7 @@ const AppNavigation = () => {
         to="/auth"
         className={(navData) => (navData.isActive ? styles.active : "")}
       >
-        Se déconnecter
+        {userId ? "Se déconnecter" : "Se connecter"}
       </NavLink>
     </nav>
   );

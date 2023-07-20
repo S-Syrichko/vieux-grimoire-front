@@ -3,6 +3,7 @@ import styles from "./HomeHero.module.scss";
 
 const HomeHero = () => {
   const navigate = useNavigate();
+
   return (
     <div className={styles.hero}>
       <svg
