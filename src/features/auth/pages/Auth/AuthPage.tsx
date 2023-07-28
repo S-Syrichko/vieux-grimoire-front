@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../../../assets/logo.svg";
-import { useLogout } from "../../../../lib/customHooks";
+import { useLogout } from "../../../../lib/hooks/useLogout";
 import AuthForm from "../../components/AuthForm/AuthForm";
 import styles from "./AuthPage.module.scss";
 

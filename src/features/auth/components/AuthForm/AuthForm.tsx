@@ -1,23 +1,20 @@
-import { useEffect } from "react";
-import { useMutation, useQueryClient } from "react-query";
-import { useNavigate } from "react-router-dom";
-import { setCookie } from "typescript-cookie";
-import { loginAPI, signupAPI } from "../../../../app/api";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Alert, Space, Spin } from "antd";
+import useAuthMutation from "../../../../lib/hooks/useAuthMutation";
 import styles from "../../../../styles/layouts/Form.module.scss";
-
 const AuthForm = () => {
-  const loginQuery = useMutation(loginAPI, { mutationKey: "login" });
-  const signupQuery = useMutation(signupAPI);
-  const queryClient = useQueryClient();
-  const navigate = useNavigate();
+  const {
+    loginMutation,
+    signupMutation,
+    alertMessage,
+    alertType,
+    handleLogin,
+    handleSignup,
+  } = useAuthMutation();
 
-  useEffect(() => {
-    if (loginQuery.isSuccess) {
-      setCookie("token", loginQuery.data?.token, { expires: 1 });
-      queryClient.setQueryData("userId", loginQuery.data?.userId);
-      navigate("/");
-    }
-  }, [loginQuery.isSuccess, loginQuery.data, queryClient, navigate]);
+  const antIcon = (
+    <LoadingOutlined style={{ fontSize: 20, color: "#fff" }} spin />
+  );
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -28,9 +25,9 @@ const AuthForm = () => {
     const password = formData.get("password") as string;
 
     if (submitButton.name === "login") {
-      loginQuery.mutate({ email, password });
+      handleLogin(email, password);
     } else if (submitButton.name === "signup") {
-      signupQuery.mutate({ email, password });
+      handleSignup(email, password);
     }
   };
 
@@ -45,13 +42,26 @@ const AuthForm = () => {
           <label htmlFor="password">Mot de passe</label>
           <input type="password" id="password" name="password" required />
         </div>
+        <Space direction="vertical" style={{ width: "70%" }}>
+          {alertMessage && (
+            <Alert message={alertMessage} type={alertType || "info"} showIcon />
+          )}
+        </Space>
         <div className={styles.actionContainer}>
           <button type="submit" name="login">
-            {loginQuery.isLoading ? "Loading" : "Se connecter"}
+            {loginMutation.isLoading ? (
+              <Spin indicator={antIcon} />
+            ) : (
+              "Se connecter"
+            )}
           </button>
           <p>ou</p>
           <button type="submit" name="signup">
-            {signupQuery.isLoading ? "Loading" : "S'inscrire"}
+            {signupMutation.isLoading ? (
+              <Spin indicator={antIcon} />
+            ) : (
+              "S'inscrire"
+            )}
           </button>
         </div>
       </form>
