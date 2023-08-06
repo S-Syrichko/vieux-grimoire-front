@@ -15,6 +15,8 @@ export type Book = {
   genre: string;
   ratings: [{ userId: string; grade: number }];
   averageRating: number;
+  _id?: string;
+  imageUrl?: string;
 };
 
 export const loginAPI = async ({ email, password }: User) => {
@@ -55,3 +57,14 @@ export const addBookAPI = async ({ book, imageFile }: { book: Book, imageFile: F
     throw err;
   }
 };
+
+export const getAllBooksAPI = async () => {
+  try {
+    const res = await axios.get("/books");
+    console.log(res.data);
+    
+    return res.data;
+  } catch (err) {
+    throw err;
+  }
+}

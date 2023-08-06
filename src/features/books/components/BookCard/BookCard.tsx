@@ -1,34 +1,14 @@
 import { Link } from "react-router-dom";
 import Rating from "../../../../components/Rating/Rating";
 import styles from "./BookCard.module.scss";
-import placeholder from "../../../../assets/images/thumb-placeholder.png";
+import { Book } from "../../../../app/api";
 
-interface Book {
-  id: number;
-  title: string;
-  author: string;
-  year: number;
-  genre: string;
-  rating: number;
-  image: string;
-}
-
-const book: Book = {
-  id: 1992,
-  title: "Le Seigneur des anneaux",
-  author: "J. R. R. Tolkien",
-  year: 1954,
-  genre: "Fantasy",
-  rating: 3,
-  image: placeholder,
-};
-
-const BookCard = () => {
+const BookCard = ({ book }: { book: Book }) => {
   return (
-    <Link to={`/books/${book.id}`} className={styles.card}>
-      <img src={book.image} alt="" />
+    <Link to={`/books/${book._id}`} className={styles.card}>
+      <img src={book.imageUrl} alt="Photo livre" />
       <div className={styles.description}>
-        <Rating rating={book.rating} size="small" />
+        <Rating rating={book.averageRating} size="small" />
         <div className={styles.descriptionText}>
           <h2>{book.title}</h2>
           <p>{book.author}</p>
