@@ -9,16 +9,16 @@ import useAddBookMutation from "../../../../lib/hooks/useAddBookMutation";
 import styles from "../../../../styles/layouts/Form.module.scss";
 import ImageUpload from "../ImageUpload/ImageUpload";
 
+const antIcon = (
+  <LoadingOutlined style={{ fontSize: 20, color: "#fff" }} spin />
+);
+
 const AddBookForm = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [rating, setRating] = useState<number>(0);
   const userId = localStorage.getItem("userId");
   const { addBookMutation, alertMessage, handleAddBook } = useAddBookMutation();
   const navigate = useNavigate();
-
-  const antIcon = (
-    <LoadingOutlined style={{ fontSize: 20, color: "#fff" }} spin />
-  );
 
   const handleImageSelected = (file: File | null) => {
     setSelectedFile(file);

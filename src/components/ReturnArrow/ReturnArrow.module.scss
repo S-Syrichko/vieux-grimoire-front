@@ -1,0 +1,11 @@
+@import '../../styles/utils/variables.scss';
+.return {
+    display: flex;
+    margin-top: 0;
+    margin-bottom: 60px;
+    p {
+        margin-left: 8px;
+        font-family: $font-secondary;
+        color: #796157;
+    }
+}

@@ -1,17 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import starFiller from "../../assets/svg/star-filler.svg";
 import starGold from "../../assets/svg/star-selected.svg";
 import styles from "./Rating.module.scss";
 
 type RatingProps = {
-    size: "small" | "medium" | "large";
-    isReadOnly?: boolean;
-    rating?: number;
-    onSelect?: (selectedRating: number) => void;
+  size: "small" | "medium" | "large";
+  isReadOnly?: boolean;
+  rating?: number;
+  onSelect?: (selectedRating: number) => void;
 };
 
-const Rating = ({size, isReadOnly, rating, onSelect}:RatingProps) => {
-  const [selectedRating, setSelectedRating] = useState(rating? rating : 0);
+const Rating = ({ size, isReadOnly, rating, onSelect }: RatingProps) => {
+  const [selectedRating, setSelectedRating] = useState(rating || 0);
+
+  useEffect(() => {
+    setSelectedRating(rating || 0);
+  }, [rating]);
 
   const handleStarClick = (starIndex: number) => {
     if (!isReadOnly && onSelect) {

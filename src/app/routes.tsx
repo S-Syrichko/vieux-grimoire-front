@@ -32,6 +32,14 @@ const AppRoutes = () => {
           </Layout>
         }
       />
+      <Route
+       path="/books/modify/:bookId"
+       element={
+          <Layout>
+            <AddBookPage />
+          </Layout>
+        }
+      />
     </Routes>
   );
 };

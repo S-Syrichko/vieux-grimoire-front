@@ -1,10 +1,8 @@
-import { useQueryClient } from "react-query";
 import { NavLink } from "react-router-dom";
 import styles from "./AppNavigation.module.scss";
 
 const AppNavigation = () => {
-  const queryClient = useQueryClient();
-  const userId = queryClient.getQueryData("userId");
+  const userId = localStorage.getItem("userId");
   return (
     <nav className={styles.nav}>
       <NavLink
