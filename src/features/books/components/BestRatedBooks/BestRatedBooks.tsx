@@ -1,11 +1,11 @@
 import { getBestRatedBooksAPI } from "../../../../app/api";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import BookCard from "../BookCard/BookCard";
 import styles from "./BestRatedBooks.module.scss";
 
 const BestRatedBooks = () => {
   const { data, isLoading, isError } = useQuery(
-    "bestRatedBooks",
+    ["bestRatedBooks"],
     getBestRatedBooksAPI
   );
 

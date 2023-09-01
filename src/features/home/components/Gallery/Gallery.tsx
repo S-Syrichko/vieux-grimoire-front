@@ -1,7 +1,7 @@
 import { Book, getAllBooksAPI } from "../../../../app/api";
 import BookCard from "../../../books/components/BookCard/BookCard";
 import styles from "./Gallery.module.scss";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 
@@ -10,7 +10,7 @@ const antIcon = (
 );
 
 const Gallery = () => {
-  const { isLoading, error, data } = useQuery("books", getAllBooksAPI);
+  const { isLoading, error, data } = useQuery(["books"], getAllBooksAPI);
 
   if (isLoading) {
     return (

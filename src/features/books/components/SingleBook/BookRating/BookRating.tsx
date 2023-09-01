@@ -2,7 +2,7 @@ import { Book, rateBookAPI } from "../../../../../app/api";
 import styles from "../SingleBook.module.scss";
 import { useEffect, useState } from "react";
 import Rating from "../../../../../components/Rating/Rating";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 type BookRatingProps = {
   ratings: Book["ratings"];

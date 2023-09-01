@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Book, deleteBookAPI, getOneBookAPI } from "../../../../app/api";
 import BookInfo from "./BookInfo/BookInfo";
 import BookRating from "./BookRating/BookRating";
@@ -16,7 +16,7 @@ const SingleBook = ({ id, onDelete }: SingleBookProps) => {
   );
   const deleteBook = useMutation(["deletebook", id], () => deleteBookAPI(id), {
     onSuccess: () => {
-      queryClient.invalidateQueries("books");
+      queryClient.invalidateQueries(["books"]);
       onDelete(bookTitle)
     },
   });
