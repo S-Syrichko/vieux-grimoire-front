@@ -7,11 +7,19 @@ type RatingProps = {
   size: "small" | "medium" | "large";
   isReadOnly?: boolean;
   rating?: number;
+  register?: any;
   onSelect?: (selectedRating: number) => void;
 };
 
-const Rating = ({ size, isReadOnly, rating, onSelect }: RatingProps) => {
+const Rating = ({
+  size,
+  isReadOnly,
+  rating,
+  register,
+  onSelect,
+}: RatingProps) => {
   const [selectedRating, setSelectedRating] = useState(rating || 0);
+  const [selectedInput, setSelectedInput] = useState<number>();
 
   useEffect(() => {
     setSelectedRating(rating || 0);
@@ -19,6 +27,8 @@ const Rating = ({ size, isReadOnly, rating, onSelect }: RatingProps) => {
 
   const handleStarClick = (starIndex: number) => {
     if (!isReadOnly && onSelect) {
+      // const starInput = <input type="radio">
+      //   value={starIndex} type="hidden" {...register("rating")}/>
       setSelectedRating(starIndex);
       onSelect(starIndex);
     }
@@ -27,14 +37,22 @@ const Rating = ({ size, isReadOnly, rating, onSelect }: RatingProps) => {
   return (
     <div className={styles.rating}>
       {[1, 2, 3, 4, 5].map((star) => (
-        <img
-          key={star}
-          onClick={() => handleStarClick(star)}
-          className={styles[size]}
-          style={{ cursor: isReadOnly ? "default" : "pointer" }}
-          src={star <= selectedRating ? starGold : starFiller}
-          alt={star <= selectedRating ? "Filled star" : "Empty star"}
-        />
+        <>
+          <img
+            key={`img-${star}`}
+            src={star <= selectedRating ? starGold : starFiller}
+            alt={star <= selectedRating ? "Filled star" : "Empty star"}
+            className={styles[size]}
+            style={{ cursor: isReadOnly ? "default" : "pointer" }}
+            onClick={() => handleStarClick(star)}
+          />
+          <input
+            key={`radio-${star}`}
+            type="radio"
+            style={{ display: "none" }}
+            {...(register && register("rating"))}
+          />
+        </>
       ))}
     </div>
   );

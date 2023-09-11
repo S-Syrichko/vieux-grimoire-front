@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../../../assets/logo.svg";
-import { useLogout } from "../../../../lib/hooks/useLogout";
+import { useLogoutQuery } from "../../../../lib/hooks/useLogoutQuery";
 import AuthForm from "../../components/AuthForm/AuthForm";
 import styles from "./AuthPage.module.scss";
 
 const AuthPage = () => {
-  const { handleLogout } = useLogout();
+  const { handleLogout } = useLogoutQuery();
 
   useEffect(() => {
     handleLogout();

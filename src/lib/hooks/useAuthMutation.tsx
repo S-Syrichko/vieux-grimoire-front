@@ -1,11 +1,13 @@
-import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { setCookie } from "typescript-cookie";
 import { loginAPI, signupAPI } from "../../app/api";
+import useGlobalStore from "./useGlobalStore";
 
 export const useAuthMutation = () => {
   const navigate = useNavigate();
+  const {updateUserId} = useGlobalStore();
   const [alertMessage, setAlertMessage] = useState<string | null>(null);
   const [alertType, setAlertType] = useState<"error" | "success" | null>(null);
 
@@ -22,7 +24,7 @@ export const useAuthMutation = () => {
     onError: (error: any) => handleServerError(error),
     onSuccess: (data) => {
       setCookie("token", data?.token, { expires: 1 });
-      localStorage.setItem("userId", data.userId);
+      updateUserId(data.userId);
       navigate("/");
     },
   });

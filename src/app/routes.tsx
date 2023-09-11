@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Layout from "../components/layout/Layout";
 import { AuthPage } from "../features/auth";
-import { AddBookPage, BookPage } from "../features/books";
+import { AddBookPage, BookPage, UpdateBookPage } from "../features/books";
 import { HomePage } from "../features/home";
 
 const AppRoutes = () => {
@@ -33,10 +33,10 @@ const AppRoutes = () => {
         }
       />
       <Route
-       path="/books/modify/:bookId"
+       path="/books/:bookId/update"
        element={
           <Layout>
-            <AddBookPage />
+            <UpdateBookPage />
           </Layout>
         }
       />

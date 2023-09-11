@@ -104,6 +104,30 @@ export const rateBookAPI = async (bookId: string, userId: string, rating: number
   }
 }
 
+export const updateBookAPI = async ({
+  book,
+  imageFile,
+}: {
+  book: Book;
+  imageFile: File;
+}) => {
+  try {
+    const formData = new FormData();
+    formData.append("book", JSON.stringify(book));
+    formData.append("image", imageFile);
+
+    const res = await axios.put(`/books/${book._id}`, formData, {
+      headers: {
+        Authorization: `Bearer ${getCookie("token")}`,
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return res.data;
+  } catch (err) {
+    throw err;
+  }
+}
+
 export const deleteBookAPI = async (id: string) => {
   try {
     const res = await axios.delete(`/books/${id}`, {

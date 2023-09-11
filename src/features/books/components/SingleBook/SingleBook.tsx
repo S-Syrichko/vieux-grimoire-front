@@ -1,8 +1,11 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Book, deleteBookAPI, getOneBookAPI } from "../../../../app/api";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { deleteBookAPI } from "../../../../app/api";
+import useGetOneBookQuery from "../../../../lib/hooks/useGetOneBookQuery";
+import useGlobalStore from "../../../../lib/hooks/useGlobalStore";
 import BookInfo from "./BookInfo/BookInfo";
 import BookRating from "./BookRating/BookRating";
 import styles from "./SingleBook.module.scss";
+import { useNavigate } from "react-router-dom";
 
 type SingleBookProps = {
   id: string;
@@ -11,17 +14,16 @@ type SingleBookProps = {
 
 const SingleBook = ({ id, onDelete }: SingleBookProps) => {
   const queryClient = useQueryClient();
-  const { data, isLoading, isError } = useQuery<Book>(["book", id], () =>
-    getOneBookAPI(id)
-  );
+  const navigate = useNavigate();
+  const { userId} = useGlobalStore();
+  const { data, isLoading, isError } = useGetOneBookQuery(id);
   const deleteBook = useMutation(["deletebook", id], () => deleteBookAPI(id), {
     onSuccess: () => {
       queryClient.invalidateQueries(["books"]);
-      onDelete(bookTitle)
+      onDelete(bookTitle);
     },
   });
-  const currentUser = localStorage.getItem("userId");
-  const isAuthor = data?.userId === currentUser;
+  const isAuthor = data?.userId === userId;
   const bookTitle = data?.title || "Le livre";
 
   const handleDelete = () => {
@@ -33,7 +35,7 @@ const SingleBook = ({ id, onDelete }: SingleBookProps) => {
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error</div>;
-  
+
   if (data)
     return (
       <div className={styles.book}>
@@ -42,7 +44,12 @@ const SingleBook = ({ id, onDelete }: SingleBookProps) => {
           {isAuthor && (
             <div className={styles.bookActions}>
               <p>Vous avez publié cet ouvrage, vous pouvez le :</p>
-              <button className={styles.bookActionsModify}>modifier</button>
+              <button
+                className={styles.bookActionsModify}
+                onClick={()=> navigate(`/books/${id}/update`)}
+              >
+                modifier
+              </button>
               <button
                 className={styles.bookActionsDelete}
                 onClick={handleDelete}
@@ -52,11 +59,11 @@ const SingleBook = ({ id, onDelete }: SingleBookProps) => {
             </div>
           )}
           <BookInfo book={data} />
-          {currentUser && (
+          {userId && (
             <BookRating
               ratings={data.ratings}
               currentBookId={id}
-              userId={currentUser}
+              userId={userId}
             />
           )}
         </div>

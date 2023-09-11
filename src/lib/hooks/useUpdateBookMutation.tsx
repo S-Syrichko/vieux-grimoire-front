@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { Book, addBookAPI } from "../../app/api";
+import { Book, updateBookAPI } from "../../app/api";
 
-const useAddBookMutation = () => {
+const useUpdateBookMutation = () => {
   const [alertMessage, setAlertMessage] = useState<string | null>(null);
 
   const handleServerError = (error: any) => {
@@ -12,16 +12,15 @@ const useAddBookMutation = () => {
       setAlertMessage("Le serveur ne répond pas");
     }
   };
-  
-  const addBookMutation = useMutation(addBookAPI, {
+  const updateBookMutation = useMutation(updateBookAPI, {
     onError: (error: any) => handleServerError(error),
   });
 
-  const handleAddBook = async (book: Book, imageFile: File) => {
+  const handleUpdateBook = async (book: Book, imageFile: File) => {
     setAlertMessage(null);
-    await addBookMutation.mutateAsync({ book, imageFile });
+    await updateBookMutation.mutateAsync({ book, imageFile });
   };
-  return { addBookMutation, alertMessage, handleAddBook };
+  return { updateBookMutation, alertMessage, handleUpdateBook };
 };
 
-export default useAddBookMutation;
+export default useUpdateBookMutation;
