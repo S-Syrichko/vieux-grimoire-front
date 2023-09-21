@@ -1,13 +1,13 @@
 import { LoadingOutlined } from "@ant-design/icons";
+import { DevTool } from "@hookform/devtools";
 import { Alert, Space, Spin } from "antd";
-import React, { useState } from "react";
-import { Book } from "../../../../app/api";
+import { useForm } from "react-hook-form";
 import Rating from "../../../../components/Rating/Rating";
+import useGlobalStore from "../../../../lib/hooks/useGlobalStore";
+import { Book, BookFormData } from "../../../../lib/utils/dataTypes";
 import styles from "../../../../styles/layouts/Form.module.scss";
 import ImageUpload from "../ImageUpload/ImageUpload";
-import useGlobalStore from "../../../../lib/hooks/useGlobalStore";
-import { useForm } from "react-hook-form";
-import { useMemo } from "react";
+
 const antIcon = (
   <LoadingOutlined style={{ fontSize: 20, color: "#fff" }} spin />
 );
@@ -16,7 +16,12 @@ type BookFormProps = {
   book?: Book;
   isLoading: boolean;
   alertMessage: string | null;
-  onValidate: (book: Book, selectedFile: File) => void;
+  onValidate: (data: BookFormData) => void;
+};
+
+type FormValues = {
+  book: Partial<Book>;
+  file: FileList;
 };
 
 const BookForm = ({
@@ -25,107 +30,119 @@ const BookForm = ({
   alertMessage,
   onValidate,
 }: BookFormProps) => {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [rating, setRating] = useState<number>(0);
-  const { userId } = useGlobalStore();
+  const userId: string = useGlobalStore().userId!;
 
-  const { register, watch, formState, handleSubmit, reset } = useForm({
-    defaultValues: useMemo(
-      () => ({
-        userId: userId as string,
-        title: book?.title,
-        author: book?.author,
-        year: book?.year,
-        genre: book?.genre,
-        ratings: [
-          {
-            userId: userId as string,
-            grade: rating,
-          },
-        ],
-        averageRating: rating,
-      }),
-      [book]
-    ),
-  });
-  const file = watch(["file"]);
+  const userRating =
+    book?.ratings.find((elt) => elt.userId === userId)?.grade ?? 0;
 
-  const onRatingSelect = (rating: number) => {
-    setRating(rating);
+  //________useForm________
+  const { register, handleSubmit, formState, control, setValue } =
+    useForm<FormValues>({
+      defaultValues: {
+        book: {
+          _id: book?._id,
+          userId: userId,
+          title: book?.title,
+          author: book?.author,
+          year: book?.year,
+          genre: book?.genre,
+          ratings: [
+            {
+              userId: userId,
+              grade: userRating,
+            },
+          ],
+        },
+      },
+    });
+  const { errors, isDirty } = formState;
+
+  const handleSetRating = (rating: number) => {
+    setValue("book.ratings.0.grade", rating, {
+      shouldValidate: true,
+      shouldDirty: true,
+      shouldTouch: true,
+    });
   };
 
-  const handleImageSelected = (file: File | null) => {
-    setSelectedFile(file);
-  };
-
-  const onSubmit = () => {
-    if (!selectedFile) {
+  const onSubmit = async (data: FormValues) => {
+    if (!data.file[0] && !book) {
       alert("Veuillez ajouter une image");
       return;
     }
-
-    //Get and parse data from form
-    const formData = new FormData(e.currentTarget);
-    const year = formData.get("year");
-    const parsedYear = year ? parseInt(year as string, 10) : 0;
-
-    //Create book object
-    const book: Book = {
-      userId: userId as string,
-      title: formData.get("title") as string,
-      author: formData.get("author") as string,
-      year: parsedYear,
-      genre: formData.get("genre") as string,
-      ratings: [
-        {
-          userId: userId as string,
-          grade: rating,
-        },
-      ],
-      averageRating: rating,
-    };
-    onValidate(book, selectedFile);
+    const bookData: BookFormData = data as BookFormData;
+    onValidate(bookData);
   };
 
   return (
     <div className={styles.formContainer}>
-      <form id="auth-form" onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <div className={styles.inputWrapper}>
           <label htmlFor="title">Titre du livre</label>
-          <input type="text" id="title" {...register("title")} required />
+          <input
+            type="text"
+            id="title"
+            {...register("book.title", { required: "Un titre est requis" })}
+          />
+          <p>{errors.book?.title?.message}</p>
         </div>
         <div className={styles.inputWrapper}>
           <label htmlFor="author">Auteur</label>
-          <input type="text" id="author" {...register("author")} required />
+          <input
+            type="text"
+            id="author"
+            {...register("book.author", {
+              required: "Un nom d'auteur est requis",
+            })}
+          />
+          <p>{errors.book?.author?.message}</p>
         </div>
         <div className={styles.inputWrapper}>
           <label htmlFor="year">Année de publication</label>
-          <input type="number" id="year" {...register("year")} required />
+          <input
+            type="number"
+            id="year"
+            {...register("book.year", {
+              valueAsNumber: true,
+              required: "Une année de publication est requise",
+            })}
+          />
+          <p>{errors.book?.year?.message}</p>
         </div>
         <div className={styles.inputWrapper}>
           <label htmlFor="genre">Genre</label>
-          <input type="text" id="genre" {...register("genre")} required />
+          <input
+            type="text"
+            id="genre"
+            {...register("book.genre", { required: "Un genre est requis" })}
+          />
+          <p>{errors.book?.genre?.message}</p>
         </div>
         <div className={styles.inputWrapper}>
           <label>Note</label>
-          <Rating size="large" onSelect={onRatingSelect} register={register} />
+          <Rating size="large" rating={userRating} onSelect={handleSetRating} />
         </div>
-        <ImageUpload
-          onImageSelected={handleImageSelected}
-          imageUrl={book?.imageUrl}
-          register={register}
-        />
+        <div className={styles.inputWrapper}>
+          <ImageUpload register={register} imageUrl={book?.imageUrl} />
+        </div>
         <Space direction="vertical" style={{ width: "70%" }}>
           {alertMessage && (
             <Alert message={alertMessage} type="error" showIcon />
           )}
         </Space>
         <div className={styles.actionContainer}>
-          <button type="submit">
-            {isLoading ? <Spin indicator={antIcon} /> : "Publier"}
+          <button type="submit" disabled={!isDirty}>
+            {isLoading ? (
+              <Spin indicator={antIcon} />
+            ) : isDirty ? (
+              "Publier"
+            ) : (
+              "En attente de changements"
+            )}
           </button>
         </div>
       </form>
+      <DevTool control={control} />
     </div>
   );
 };

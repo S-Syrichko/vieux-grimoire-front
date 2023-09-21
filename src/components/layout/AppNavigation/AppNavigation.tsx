@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
-import styles from "./AppNavigation.module.scss";
 import useGlobalStore from "../../../lib/hooks/useGlobalStore";
+import styles from "./AppNavigation.module.scss";
 
 const AppNavigation = () => {
   const { userId } = useGlobalStore();

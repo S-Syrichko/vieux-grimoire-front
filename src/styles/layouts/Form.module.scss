@@ -29,6 +29,12 @@
       font-size: 25px;
       padding: 15px 25px;
     }
+    p {
+      color: red;
+      text-align: center;
+      font-family: $font-secondary;
+      font-weight: bold;
+    }
     //AddBookForm specific styles
     .fileArea {
       display: flex;

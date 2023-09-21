@@ -2,6 +2,12 @@
   display: flex;
   justify-content: space-between;
   max-width: 160px;
+  
+  .small, .medium, .large {
+    &:hover {
+      filter: invert(10%);
+    }
+  }
   .small {
     width: 23px;
     height: 23px;
@@ -15,5 +21,6 @@
   .large {
     width: 43px;
     height: 43px;
+    
   }
 }

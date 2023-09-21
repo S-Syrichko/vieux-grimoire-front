@@ -25,6 +25,9 @@ button {
     background-color: #b99056;
     color: #fff;
   }
+  &:disabled {
+    opacity: 0.5;
+  }
 }
 h1, h3{
   margin: 0;

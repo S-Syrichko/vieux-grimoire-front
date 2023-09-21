@@ -1,5 +1,5 @@
 export function invariant(value: unknown): asserts value {
-    if (value) return;
+  if (value) return;
 
-    throw new Error("Invariant violation");
+  throw new Error("Invariant violation");
 }

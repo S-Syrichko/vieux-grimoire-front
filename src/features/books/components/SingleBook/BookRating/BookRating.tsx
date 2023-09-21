@@ -1,8 +1,9 @@
-import { Book, rateBookAPI } from "../../../../../app/api";
-import styles from "../SingleBook.module.scss";
-import { useEffect, useState } from "react";
-import Rating from "../../../../../components/Rating/Rating";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import { rateBookAPI } from "../../../../../app/api";
+import Rating from "../../../../../components/Rating/Rating";
+import { Book } from "../../../../../lib/utils/dataTypes";
+import styles from "../SingleBook.module.scss";
 
 type BookRatingProps = {
   ratings: Book["ratings"];
@@ -20,6 +21,7 @@ const BookRating = ({ ratings, currentBookId, userId }: BookRatingProps) => {
     {
       onSuccess: async () => {
         setBookRated(2);
+        queryClient.invalidateQueries(["books"]);
         queryClient.invalidateQueries(["book", currentBookId]);
         queryClient.invalidateQueries(["bestRatedBooks"]);
       },

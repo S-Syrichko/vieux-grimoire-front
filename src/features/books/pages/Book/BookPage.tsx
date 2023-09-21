@@ -1,10 +1,10 @@
-import { useParams, useNavigate } from "react-router-dom";
-import BestRatedBooks from "../../components/BestRatedBooks/BestRatedBooks";
-import styles from "./BookPage.module.scss";
-import SingleBook from "../../components/SingleBook/SingleBook";
-import ReturnArrow from "../../../../components/ReturnArrow/ReturnArrow";
 import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import scratch from "../../../../assets/images/scratch.png";
+import ReturnArrow from "../../../../components/ReturnArrow/ReturnArrow";
+import BestRatedBooks from "../../components/BestRatedBooks/BestRatedBooks";
+import SingleBook from "../../components/SingleBook/SingleBook";
+import styles from "./BookPage.module.scss";
 
 const BookPage = () => {
   const { bookId } = useParams<{ bookId?: string }>();

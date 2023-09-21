@@ -1,9 +1,10 @@
-import { Book, getAllBooksAPI } from "../../../../app/api";
+import { LoadingOutlined } from "@ant-design/icons";
+import { useQuery } from "@tanstack/react-query";
+import { Spin } from "antd";
+import { getAllBooksAPI } from "../../../../app/api";
+import { Book } from "../../../../lib/utils/dataTypes";
 import BookCard from "../../../books/components/BookCard/BookCard";
 import styles from "./Gallery.module.scss";
-import { useQuery } from "@tanstack/react-query";
-import { LoadingOutlined } from "@ant-design/icons";
-import { Spin } from "antd";
 
 const antIcon = (
   <LoadingOutlined style={{ fontSize: 20, color: "#fff" }} spin />
@@ -23,9 +24,9 @@ const Gallery = () => {
 
   return (
     <div className={styles.gallery}>
-        {data?.map((book: Book, index: number) => (
-            <BookCard key={index} book={book} />
-        ))}
+      {data?.map((book: Book, index: number) => (
+        <BookCard key={index} book={book} />
+      ))}
     </div>
   );
 };

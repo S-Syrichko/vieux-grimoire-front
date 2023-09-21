@@ -1,5 +1,5 @@
-import { getBestRatedBooksAPI } from "../../../../app/api";
 import { useQuery } from "@tanstack/react-query";
+import { getBestRatedBooksAPI } from "../../../../app/api";
 import BookCard from "../BookCard/BookCard";
 import styles from "./BestRatedBooks.module.scss";
 

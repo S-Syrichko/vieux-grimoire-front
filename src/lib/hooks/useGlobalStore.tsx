@@ -1,5 +1,5 @@
-import {create} from 'zustand';
-import { Book } from '../../app/api';
+import { create } from 'zustand';
+import { Book } from '../utils/dataTypes';
 
 interface IGlobalStore {
   userId: string | null;

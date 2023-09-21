@@ -1,68 +1,61 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
+import addFileIMG from "../../../../assets/images/add_file.png";
 import styles from "../../../../styles/layouts/Form.module.scss";
 
 type ImageUploadProps = {
-  onImageSelected: (file: File | null) => void;
   imageUrl?: string;
   register?: any;
 };
 
-const ImageUpload = ({ onImageSelected, imageUrl, register }: ImageUploadProps) => {
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [previewImage, setPreviewImage] = useState<string | undefined>(
-    imageUrl || undefined
+const ImageUpload = ({ imageUrl, register }: ImageUploadProps) => {
+  const [previewImageUrl, setPreviewImageUrl] = useState<string | undefined>(
+    imageUrl
   );
 
-  const handleButtonClick = () => {
-    fileInputRef?.current?.click();
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
+
     if (file) {
       const reader = new FileReader();
-      reader.readAsDataURL(file);
       reader.onload = () => {
-        setPreviewImage(reader.result as string);
+        setPreviewImageUrl(reader.result as string);
       };
-      setSelectedFile(file);
-      onImageSelected(file);
+      reader.readAsDataURL(file);
+    } else if (!file && imageUrl) {
+      setPreviewImageUrl(imageUrl);
     } else {
-      setPreviewImage(undefined);
-      setSelectedFile(null);
-      onImageSelected(null);
+      setPreviewImageUrl(undefined);
     }
   };
-  return (
-    <div className={styles.inputWrapper}>
-      <label htmlFor="image">Visuel</label>
-      <div className={styles.fileArea}>
-        {selectedFile || imageUrl ? (
-          <>
-            <img src={previewImage} alt="selected file" />
-            <a onClick={handleButtonClick}>modifier</a>
-          </>
-        ) : (
-          <>
-            <button type="button" onClick={handleButtonClick}>
-              +
-            </button>
-            <p>Ajouter une image</p>
-          </>
-        )}
-      </div>
-      <input {...register('file')} type="file" id="file" />
 
+  return (
+    <label
+      className={styles.fileArea}
+      htmlFor="file"
+      style={{ cursor: "pointer" }}
+    >
+      {previewImageUrl ? (
+        <>
+          <img src={previewImageUrl} alt="selected file" />
+          <a>modifier</a>
+        </>
+      ) : (
+        <>
+          <img src={addFileIMG} alt="selected file" />
+          <p>Ajouter une image</p>
+        </>
+      )}
       <input
         type="file"
-        id="image"
+        id="file"
         accept="image/*"
+        {...register("file", {
+          onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+            handleImageChange(e),
+        })}
         style={{ display: "none" }}
-        onChange={handleFileChange}
-        required
       />
-    </div>
+    </label>
   );
 };
 

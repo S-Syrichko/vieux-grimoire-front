@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
 import useGetOneBookQuery from "../../../../lib/hooks/useGetOneBookQuery";
 import useUpdateBookMutation from "../../../../lib/hooks/useUpdateBookMutation";
+import { invariant } from "../../../../lib/utils/functions";
 import BookForm from "../../components/BookForm/BookForm";
 import styles from "./UpdateBook.module.scss";
-import { invariant } from "../../../../lib/utils/functions";
 
 const UpdateBookPage = () => {
   const { bookId } = useParams<{ bookId: string }>();

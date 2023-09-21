@@ -1,9 +1,11 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
-import { Book, updateBookAPI } from "../../app/api";
+import { updateBookAPI } from "../../app/api";
+import { BookFormData } from "../utils/dataTypes";
 
 const useUpdateBookMutation = () => {
   const [alertMessage, setAlertMessage] = useState<string | null>(null);
+  const queryClient = useQueryClient();
 
   const handleServerError = (error: any) => {
     if (error.response) {
@@ -14,11 +16,16 @@ const useUpdateBookMutation = () => {
   };
   const updateBookMutation = useMutation(updateBookAPI, {
     onError: (error: any) => handleServerError(error),
+    onSuccess: async () => {
+      queryClient.invalidateQueries(["books"]);
+      queryClient.invalidateQueries(["bestRatedBooks"]);
+    },
   });
 
-  const handleUpdateBook = async (book: Book, imageFile: File) => {
+  const handleUpdateBook = async (data: BookFormData) => {
     setAlertMessage(null);
-    await updateBookMutation.mutateAsync({ book, imageFile });
+    await updateBookMutation.mutateAsync(data);
+    queryClient.invalidateQueries(["book", data.book._id]);
   };
   return { updateBookMutation, alertMessage, handleUpdateBook };
 };

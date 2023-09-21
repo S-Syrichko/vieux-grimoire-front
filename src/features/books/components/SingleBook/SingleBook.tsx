@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 import { deleteBookAPI } from "../../../../app/api";
 import useGetOneBookQuery from "../../../../lib/hooks/useGetOneBookQuery";
 import useGlobalStore from "../../../../lib/hooks/useGlobalStore";
 import BookInfo from "./BookInfo/BookInfo";
 import BookRating from "./BookRating/BookRating";
 import styles from "./SingleBook.module.scss";
-import { useNavigate } from "react-router-dom";
 
 type SingleBookProps = {
   id: string;
@@ -15,7 +15,7 @@ type SingleBookProps = {
 const SingleBook = ({ id, onDelete }: SingleBookProps) => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const { userId} = useGlobalStore();
+  const { userId } = useGlobalStore();
   const { data, isLoading, isError } = useGetOneBookQuery(id);
   const deleteBook = useMutation(["deletebook", id], () => deleteBookAPI(id), {
     onSuccess: () => {
@@ -46,7 +46,7 @@ const SingleBook = ({ id, onDelete }: SingleBookProps) => {
               <p>Vous avez publié cet ouvrage, vous pouvez le :</p>
               <button
                 className={styles.bookActionsModify}
-                onClick={()=> navigate(`/books/${id}/update`)}
+                onClick={() => navigate(`/books/${id}/update`)}
               >
                 modifier
               </button>

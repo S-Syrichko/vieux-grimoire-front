@@ -1,23 +1,8 @@
 import axios from "axios";
 import { getCookie } from "typescript-cookie";
+import { BookFormData, User } from "../lib/utils/dataTypes";
+
 axios.defaults.baseURL = "http://localhost:4000/api";
-
-type User = {
-  email: string;
-  password: string;
-};
-
-export type Book = {
-  userId: string;
-  title: string;
-  author: string;
-  year: number;
-  genre: string;
-  ratings: [{ userId: string; grade: number }];
-  averageRating: number;
-  _id?: string;
-  imageUrl?: string;
-};
 
 export const loginAPI = async ({ email, password }: User) => {
   try {
@@ -37,19 +22,13 @@ export const signupAPI = async ({ email, password }: User) => {
   }
 };
 
-export const addBookAPI = async ({
-  book,
-  imageFile,
-}: {
-  book: Book;
-  imageFile: File;
-}) => {
+export const addBookAPI = async (data: BookFormData) => {
   try {
     const jwt = getCookie("token");
 
     const formData = new FormData();
-    formData.append("book", JSON.stringify(book));
-    formData.append("image", imageFile);
+    formData.append("book", JSON.stringify(data.book));
+    formData.append("image", data.file[0]);
 
     const res = await axios.post("/books", formData, {
       headers: {
@@ -91,32 +70,38 @@ export const getBestRatedBooksAPI = async () => {
   }
 };
 
-export const rateBookAPI = async (bookId: string, userId: string, rating: number) => {
-  try{
-    const res = await axios.post(`/books/${bookId}/rating`, {userId, rating}, {
-      headers: {
-        Authorization: `Bearer ${getCookie("token")}`,
-      },
-    });
+export const rateBookAPI = async (
+  bookId: string,
+  userId: string,
+  rating: number
+) => {
+  try {
+    const res = await axios.post(
+      `/books/${bookId}/rating`,
+      { userId, rating },
+      {
+        headers: {
+          Authorization: `Bearer ${getCookie("token")}`,
+        },
+      }
+    );
     return res.data;
   } catch (err) {
     throw err;
   }
-}
+};
 
-export const updateBookAPI = async ({
-  book,
-  imageFile,
-}: {
-  book: Book;
-  imageFile: File;
-}) => {
+export const updateBookAPI = async (data: BookFormData) => {
+  let newData;
+  if (data.file[0]) {
+    newData = new FormData();
+    newData.append("book", JSON.stringify(data.book));
+    newData.append("image", data.file[0]);
+  } else {
+    newData = { ...data.book };
+  }
   try {
-    const formData = new FormData();
-    formData.append("book", JSON.stringify(book));
-    formData.append("image", imageFile);
-
-    const res = await axios.put(`/books/${book._id}`, formData, {
+    const res = await axios.put(`/books/${data.book._id}`, newData, {
       headers: {
         Authorization: `Bearer ${getCookie("token")}`,
         "Content-Type": "multipart/form-data",
@@ -126,7 +111,7 @@ export const updateBookAPI = async ({
   } catch (err) {
     throw err;
   }
-}
+};
 
 export const deleteBookAPI = async (id: string) => {
   try {
@@ -139,4 +124,4 @@ export const deleteBookAPI = async (id: string) => {
   } catch (err) {
     throw err;
   }
-}
+};
