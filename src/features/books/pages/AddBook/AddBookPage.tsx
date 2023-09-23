@@ -4,7 +4,8 @@ import shelf from "../../../../assets/images/shelf.jpg";
 import useAddBookMutation from "../../../../lib/hooks/useAddBookMutation";
 import useGlobalStore from "../../../../lib/hooks/useGlobalStore";
 import BookForm from "../../components/BookForm/BookForm";
-import styles from "./AddBookPage.module.scss";
+import styles from "../../../../styles/layouts/BookPage.module.scss";
+
 
 const AddBookPage = () => {
   const { userId } = useGlobalStore();
@@ -17,31 +18,27 @@ const AddBookPage = () => {
     }
   }, [userId]);
 
-  if (addBookMutation.isSuccess) {
-    return (
-      <main className={styles.addBook}>
-        <div className={styles.pageBody}>
-          <div className={styles.bookAdded}>
+  return (
+    <main className={styles.book}>
+      <div className={styles.pageBody}>
+        {addBookMutation.isSuccess ? (
+          <div className={styles.bookActionConfirm}>
             <h1>Merci !</h1>
             <p>votre livre a bien été publié</p>
             <img src={shelf} alt="étagère" />
             <button onClick={() => navigate("/")}>Retour à l'accueil</button>
           </div>
-        </div>
-      </main>
-    );
-  }
-
-  return (
-    <main className={styles.addBook}>
-      <div className={styles.pageBody}>
-        <h1>Ajouter un livre</h1>
-        <p>tous les champs sont obligatoires</p>
-        <BookForm
-          isLoading={addBookMutation.isLoading}
-          alertMessage={alertMessage}
-          onValidate={handleAddBook}
-        />
+        ) : (
+          <>
+            <h1>Ajouter un livre</h1>
+            <p>tous les champs sont obligatoires</p>
+            <BookForm
+              isLoading={addBookMutation.isLoading}
+              alertMessage={alertMessage}
+              onValidate={handleAddBook}
+            />
+          </>
+        )}
       </div>
     </main>
   );

@@ -1,0 +1,40 @@
+@import "../utils/variables";
+@import "../utils/mixins";
+
+.book {
+  flex: 1;
+  background-color: $color-tertiary;
+  .background {
+    position: relative;
+    z-index: 0;
+  }
+  .pageBody,
+  .pageBodyMultiLayer {
+    position: relative;
+    box-sizing: border-box;
+    border-radius: 7px;
+    background-color: white;
+    box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.08);
+  }
+
+  .pageBody {
+    padding: 80px 60px;
+    margin: 50px 5% 130px 5%;
+    text-align: center;
+  }
+
+  .pageBodyMultiLayer {
+    padding: 50px 110px 59px 120px;
+    margin: 130px 5%;
+    @include layer-effect;
+  }
+  &ActionConfirm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    img {
+      max-height: 350px;
+      margin: 35px 0;
+    }
+  }
+}

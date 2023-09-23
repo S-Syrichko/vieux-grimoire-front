@@ -5,6 +5,8 @@
   width: 100%;
   display: flex;
   align-items: center;
+  background-color: white;
+  z-index: 0;
   p {
     font-size: 14px;
     font-family: $font-secondary;
@@ -39,15 +41,15 @@
         width: 14px;
         height: 14px;
         border-radius: 50%;
-        border: 1px solid #fff;
-        background-color: #d9a963;
+        border: 1px solid white;
+        background-color: $color-primary;
       }
     }
     .adressContainer {
       a {
         font-size: 14px;
         font-family: $font-secondary;
-        color: #796157;
+        color: $font-color-secondary;
         margin-top: 6px;
         text-decoration: underline;
       }

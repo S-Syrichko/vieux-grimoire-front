@@ -30,12 +30,11 @@ const BookForm = ({
   alertMessage,
   onValidate,
 }: BookFormProps) => {
+  
   const userId: string = useGlobalStore().userId!;
-
   const userRating =
     book?.ratings.find((elt) => elt.userId === userId)?.grade ?? 0;
 
-  //________useForm________
   const { register, handleSubmit, formState, control, setValue } =
     useForm<FormValues>({
       defaultValues: {

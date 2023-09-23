@@ -7,11 +7,11 @@ import BookCard from "../../../books/components/BookCard/BookCard";
 import styles from "./Gallery.module.scss";
 
 const antIcon = (
-  <LoadingOutlined style={{ fontSize: 20, color: "#fff" }} spin />
+  <LoadingOutlined style={{ fontSize: 60, color: "#d9a963" }} spin />
 );
 
 const Gallery = () => {
-  const { isLoading, error, data } = useQuery(["books"], getAllBooksAPI);
+  const { isLoading, isError, data } = useQuery(["books"], getAllBooksAPI);
 
   if (isLoading) {
     return (
@@ -20,7 +20,10 @@ const Gallery = () => {
       </div>
     );
   }
-  if (error) return <div>Une erreur est survenue</div>;
+  if (isError)
+    return <div className={styles.error} >Erreur lors du chargement des données</div>;
+  
+  if (data && data.length == 0) return <div>Aucun livre trouvé</div>
 
   return (
     <div className={styles.gallery}>

@@ -9,21 +9,21 @@ body, #root {
 
 a{
   text-decoration: none;
-  color: #2c1810;
+  color: $font-color-primary;
 }
 
 button {
   cursor: pointer;
   padding: 20px;
-  background-color: #d9a963;
-  color: #2c1810;
+  background-color: $color-primary;
+  color: $font-color-primary;
   font-family: $font-secondary;
   font-size: 16px;
   border: none;
   border-radius: 5px;
   &:hover {
-    background-color: #b99056;
-    color: #fff;
+    background-color: $color-quaternary;
+    color: white;
   }
   &:disabled {
     opacity: 0.5;
@@ -31,7 +31,7 @@ button {
 }
 h1, h3{
   margin: 0;
-  color: #796157;
+  color: $font-color-secondary;
   font-size: 44px;
   font-style: italic;
   font-weight: 400;  

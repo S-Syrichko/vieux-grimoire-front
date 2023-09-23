@@ -1,40 +1,33 @@
+@import "../../../../styles/utils/variables";
+@import "../../../../styles/utils/mixins";
+
 .home {
   flex: 1;
-  background-color: #f2e3ce;
+  background-color: $color-secondary;
   .background {
     position: relative;
     z-index: 0;
     &Img {
       position: absolute;
-      top: -130px;
+      top: -100px;
       left: 0;
       width: 100%;
       padding-bottom: 42.99%; /* Ratio d'aspect 1440:619 */
       background-image: url("/src/assets/images/library.png");
       background-size: cover;
+      background-repeat: no-repeat;
       z-index: -1;
     }
   }
   .pageBody {
     position: relative;
     box-sizing: border-box;
-    padding: 80px 60px;
-    margin: 130px 5%;
+    padding: 60px;
+    margin: 100px 5%;
     border-radius: 7px;
     background-color: white;
     box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.08);
     text-align: center;
-    &::before {
-      content: "";
-      position: absolute;
-      top: 10px;
-      left: 9px;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      border-radius: 7px;
-      background-color: white;
-      box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.08);
-    }
+    @include layer-effect;
   }
 }
