@@ -5,7 +5,7 @@ import styles from "./BookCard.module.scss";
 
 const BookCard = ({ book }: { book: Book }) => {
   return (
-    <Link to={`/books/${book._id}`} className={styles.card}>
+    <Link to={`/books/${book._id!}`} className={styles.card}>
       <img src={book.imageUrl} alt="Photo livre" />
       <div className={styles.description}>
         <Rating rating={book.averageRating} size="small" isReadOnly />

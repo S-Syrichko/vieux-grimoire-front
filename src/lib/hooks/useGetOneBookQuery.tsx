@@ -4,9 +4,8 @@ import { Book } from '../utils/dataTypes';
 
 
 const useGetOneBookQuery = (id: string) => {
-    const { data, isLoading, isError } = useQuery<Book>(["book", id], () =>
-    getOneBookAPI(id)
-  );
+    const { data, isLoading, isError } = useQuery<Book>({ queryKey: ["book", id], queryFn: () =>
+    getOneBookAPI(id) });
   return { data, isLoading, isError };
 };
 

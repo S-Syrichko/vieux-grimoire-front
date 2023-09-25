@@ -19,7 +19,7 @@ type BookFormProps = {
   onValidate: (data: BookFormData) => void;
 };
 
-type FormValues = {
+export type FormValues = {
   book: Partial<Book>;
   file: FileList;
 };

@@ -1,17 +1,23 @@
 .hero {
+  position: relative;
+  margin-bottom: 120px;
+  .svgContainer {
+    position: absolute;
+    width: 100%;
+    overflow: hidden;
+    .svg-content {
+      display: inline-block;
+      position: absolute;
+      top: 30%;
+      left: 10%;
+    }
+  }
+  p {
+    margin-top: 11px;
+    margin-bottom: 28px;
+    font-size: 28px;
+  }
+  button {
     position: relative;
-    margin-bottom: 120px;
-    svg{
-        position: absolute;
-        top: 30%;
-        left: 10%;
-    }
-    p {
-        margin-top: 11px;
-        margin-bottom: 28px;
-        font-size: 28px;
-    }
-    button {
-        position: relative;
-    }
+  }
 }

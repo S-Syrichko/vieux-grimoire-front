@@ -11,7 +11,10 @@ const antIcon = (
 );
 
 const Gallery = () => {
-  const { isLoading, isError, data } = useQuery(["books"], getAllBooksAPI);
+  const { isLoading, isError, data } = useQuery({
+    queryKey: ["books"],
+    queryFn: getAllBooksAPI,
+  });
 
   if (isLoading) {
     return (
@@ -21,9 +24,11 @@ const Gallery = () => {
     );
   }
   if (isError)
-    return <div className={styles.error} >Erreur lors du chargement des données</div>;
-  
-  if (data && data.length == 0) return <div>Aucun livre trouvé</div>
+    return (
+      <div className={styles.error}>Erreur lors du chargement des données</div>
+    );
+
+  if (data && data.length == 0) return <div>Aucun livre trouvé</div>;
 
   return (
     <div className={styles.gallery}>

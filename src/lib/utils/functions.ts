@@ -1,5 +1,10 @@
-export function invariant(value: unknown): asserts value {
-  if (value) return;
-
-  throw new Error("Invariant violation");
-}
+export const handleServerError = (error: unknown) => {
+    const customError = error as { response?: { data: { message: string } } };
+    let alertMessage
+    if (customError.response) {
+        alertMessage = customError.response.data.message
+    } else {
+        alertMessage = "Le serveur ne répond pas"
+    }
+    return alertMessage
+  };

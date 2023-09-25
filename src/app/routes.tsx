@@ -33,8 +33,8 @@ const AppRoutes = () => {
         }
       />
       <Route
-       path="/books/:bookId/update"
-       element={
+        path="/books/:bookId/update"
+        element={
           <Layout>
             <UpdateBookPage />
           </Layout>

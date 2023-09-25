@@ -3,25 +3,21 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { setCookie } from "typescript-cookie";
 import { loginAPI, signupAPI } from "../../app/api";
+import { handleServerError } from "../utils/functions";
 import useGlobalStore from "./useGlobalStore";
 
 export const useAuthMutation = () => {
   const navigate = useNavigate();
-  const {updateUserId} = useGlobalStore();
+  const { updateUserId } = useGlobalStore();
   const [alertMessage, setAlertMessage] = useState<string | null>(null);
   const [alertType, setAlertType] = useState<"error" | "success" | null>(null);
 
-  const handleServerError = (error: any) => {
-    if (error.response) {
-      setAlertMessage(error.response.data.message);
-    } else {
-      setAlertMessage("Le serveur ne répond pas");
-    }
-    setAlertType("error");
-  };
-
-  const loginMutation = useMutation(loginAPI, {
-    onError: (error: any) => handleServerError(error),
+  const loginMutation = useMutation({
+    mutationFn: loginAPI,
+    onError: (error) => {
+      setAlertMessage(handleServerError(error));
+      setAlertType("error");
+    },
     onSuccess: (data) => {
       setCookie("token", data?.token, { expires: 1 });
       updateUserId(data.userId);
@@ -29,8 +25,12 @@ export const useAuthMutation = () => {
     },
   });
 
-  const signupMutation = useMutation(signupAPI, {
-    onError: (error: any) => handleServerError(error),
+  const signupMutation = useMutation({
+    mutationFn: signupAPI,
+    onError: (error) => {
+      setAlertMessage(handleServerError(error));
+      setAlertType("error");
+    },
     onSuccess: () => {
       setAlertMessage("Compte créé. Vous pouvez maintenant vous connecter");
       setAlertType("success");

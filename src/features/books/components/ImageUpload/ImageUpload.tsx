@@ -1,10 +1,13 @@
 import { useState } from "react";
 import addFileIMG from "../../../../assets/images/add_file.png";
 import styles from "../../../../styles/layouts/Form.module.scss";
+import React from "react";
+import { UseFormRegister } from "react-hook-form";
+import { FormValues } from "../BookForm/BookForm";
 
 type ImageUploadProps = {
   imageUrl?: string;
-  register?: any;
+  register: UseFormRegister<FormValues>;
 };
 
 const ImageUpload = ({ imageUrl, register }: ImageUploadProps) => {

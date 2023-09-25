@@ -6,7 +6,7 @@ interface IGlobalStore {
   book: Book | null;
   updateUserId: (userId: string | null) => void;
   updateBook: (book: Book | null) => void;
-};
+}
 
 const useGlobalStore = create<IGlobalStore>()((set) => ({
   userId: null,

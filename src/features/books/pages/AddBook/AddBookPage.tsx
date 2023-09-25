@@ -16,7 +16,7 @@ const AddBookPage = () => {
     if (!userId) {
       navigate("/auth");
     }
-  }, [userId]);
+  }, [userId, navigate]);
 
   return (
     <main className={styles.book}>

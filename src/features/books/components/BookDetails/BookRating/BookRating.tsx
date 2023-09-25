@@ -15,22 +15,16 @@ const BookRating = ({ ratings, currentBookId, userId }: BookRatingProps) => {
   const [rating, setRating] = useState<number>(0);
   const [bookRated, setBookRated] = useState<number>(0); //0: Not Rated, 1: Already Rated, 2: Rating Submitted
   const queryClient = useQueryClient();
-  const mutation = useMutation(
-    ["rating", currentBookId],
-    () => rateBookAPI(currentBookId, userId, rating),
-    {
-      onSuccess: async () => {
-        setBookRated(2);
-        queryClient.invalidateQueries(["books"]);
-        queryClient.invalidateQueries(["book", currentBookId]);
-        queryClient.invalidateQueries(["bestRatedBooks"]);
-      },
-    }
-  );
-
-  useEffect(() => {
-    findUserRating();
-  }, [ratings]);
+  const mutation = useMutation({
+    mutationKey: ["rating", currentBookId],
+    mutationFn: () => rateBookAPI(currentBookId, userId, rating),
+    onSuccess: async () => {
+      setBookRated(2);
+      queryClient.invalidateQueries(["books"]);
+      queryClient.invalidateQueries(["book", currentBookId]);
+      queryClient.invalidateQueries(["bestRatedBooks"]);
+    },
+  });
 
   const findUserRating = () => {
     ratings.forEach((rating) => {
@@ -40,6 +34,10 @@ const BookRating = ({ ratings, currentBookId, userId }: BookRatingProps) => {
       }
     });
   };
+
+  useEffect(() => {
+    findUserRating();
+  });
 
   return (
     <>

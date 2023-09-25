@@ -1,7 +1,14 @@
 import { LoadingOutlined } from "@ant-design/icons";
 import { Alert, Space, Spin } from "antd";
+import { SyntheticEvent } from "react";
 import useAuthMutation from "../../../../lib/hooks/useAuthMutation";
 import styles from "../../../../styles/layouts/Form.module.scss";
+
+
+const antIcon = (
+  <LoadingOutlined style={{ fontSize: 20, color: "#fff" }} spin />
+);
+
 const AuthForm = () => {
   const {
     loginMutation,
@@ -12,14 +19,11 @@ const AuthForm = () => {
     handleSignup,
   } = useAuthMutation();
 
-  const antIcon = (
-    <LoadingOutlined style={{ fontSize: 20, color: "#fff" }} spin />
-  );
 
-  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = (e: SyntheticEvent<HTMLFormElement, SubmitEvent>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const submitButton = (e as any).nativeEvent.submitter as HTMLButtonElement;
+    const submitButton = e.nativeEvent.submitter as HTMLButtonElement;
 
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;

@@ -3,11 +3,6 @@
   justify-content: space-between;
   max-width: 160px;
   
-  .small, .medium, .large {
-    &:hover {
-      filter: invert(10%);
-    }
-  }
   .small {
     width: 23px;
     height: 23px;
@@ -22,5 +17,13 @@
     width: 43px;
     height: 43px;
     
+  }
+  .star-interaction {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    &:hover {
+      transform: scale(1.1);
+      filter: invert(10%);
+    }
   }
 }

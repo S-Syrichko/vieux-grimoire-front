@@ -8,7 +8,6 @@ type RatingProps = {
   isReadOnly?: boolean;
   rating?: number;
   onSelect?: (selectedRating: number) => void;
-  register?: any;
 };
 
 const Rating = ({
@@ -18,6 +17,7 @@ const Rating = ({
   onSelect,
 }: RatingProps) => {
   const [selectedRating, setSelectedRating] = useState(rating || 0);
+
 
   useEffect(() => {
     setSelectedRating(rating || 0);
@@ -38,7 +38,7 @@ const Rating = ({
             key={`img-${star}`}
             src={star <= selectedRating ? starGold : starFiller}
             alt={star <= selectedRating ? "Filled star" : "Empty star"}
-            className={styles[size]}
+            className={`${styles[size]} ${isReadOnly ? '' : styles['star-interaction']}`}
             style={{ cursor: isReadOnly ? "default" : "pointer" }}
             onClick={() => handleStarClick(star)}
           />

@@ -1,9 +1,23 @@
 .bestRated{
-    height: 40%;
     margin: 50px 0 0 0;
+    position: relative;
+    .svgContainer {
+        position: absolute;
+        width: 100%;
+        overflow: hidden;
+        top: 0;
+        left: 20%;
+        .svg-content {
+          display: inline-block;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+      }
 }
 .gallery{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
+    flex-wrap: wrap;
 }

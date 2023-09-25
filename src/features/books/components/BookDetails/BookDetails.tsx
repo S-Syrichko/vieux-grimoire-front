@@ -11,14 +11,16 @@ type SingleBookProps = {
   onDelete: (bookTitle: string) => void;
 };
 
-const BookDetails = ( {onDelete }: SingleBookProps) => {
-
+const BookDetails = ({ onDelete }: SingleBookProps) => {
   const bookId: string = useParams().bookId!;
   const { userId } = useGlobalStore();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { data, isLoading, isError } = useGetOneBookQuery(bookId);
-  const deleteBook = useMutation(["deletebook", bookId], () => deleteBookAPI(bookId), {
+
+  const deleteBook = useMutation({
+    mutationKey: ["deletebook"],
+    mutationFn: () => deleteBookAPI(bookId),
     onSuccess: () => {
       queryClient.invalidateQueries(["books"]);
       onDelete(bookTitle);
@@ -27,7 +29,6 @@ const BookDetails = ( {onDelete }: SingleBookProps) => {
   const isAuthor = data?.userId === userId;
   const bookTitle = data?.title || "Le livre";
 
-  
   const handleDelete = () => {
     const check = confirm("Voulez-vous vraiment supprimer ce livre ?");
     if (check) {

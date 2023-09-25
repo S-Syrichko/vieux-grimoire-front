@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { setCookie } from "typescript-cookie";
 import useGlobalStore from "./useGlobalStore";
 
-export const useLogoutQuery = () => {
+export const useLogout = () => {
   const navigate = useNavigate();
   const { updateUserId } = useGlobalStore();
 
