@@ -1,6 +1,7 @@
 import { LoadingOutlined } from "@ant-design/icons";
 import { DevTool } from "@hookform/devtools";
 import { Alert, Space, Spin } from "antd";
+import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import Rating from "../../../../components/Rating/Rating";
 import useGlobalStore from "../../../../lib/hooks/useGlobalStore";
@@ -25,7 +26,6 @@ const BookForm = ({
   alertMessage,
   onValidate,
 }: BookFormProps) => {
-  
   const userId: string = useGlobalStore().userId!;
   const userRating =
     book?.ratings.find((elt) => elt.userId === userId)?.grade ?? 0;
@@ -139,6 +139,28 @@ const BookForm = ({
       <DevTool control={control} />
     </div>
   );
+};
+
+BookForm.propTypes = {
+  book: PropTypes.shape({
+    userId: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    genre: PropTypes.string.isRequired,
+    ratings: PropTypes.arrayOf(
+      PropTypes.shape({
+        userId: PropTypes.string.isRequired,
+        grade: PropTypes.number.isRequired,
+      })
+    ),
+    averageRating: PropTypes.number,
+    _id: PropTypes.string,
+    imageUrl: PropTypes.string,
+  }),
+  isLoading: PropTypes.bool.isRequired,
+  alertMessage: PropTypes.string,
+  onValidate: PropTypes.func.isRequired,
 };
 
 export default BookForm;

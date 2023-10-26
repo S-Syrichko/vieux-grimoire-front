@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { UseFormRegister } from "react-hook-form";
 import addFileIMG from "../../../../assets/images/add_file.png";
@@ -59,6 +60,11 @@ const ImageUpload = ({ imageUrl, register }: ImageUploadProps) => {
       />
     </label>
   );
+};
+
+ImageUpload.propTypes = {
+  imageUrl: PropTypes.string,
+  register: PropTypes.func.isRequired,
 };
 
 export default ImageUpload;

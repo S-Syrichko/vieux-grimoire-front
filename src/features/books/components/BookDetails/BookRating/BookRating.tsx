@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { rateBookAPI } from "../../../../../app/api";
 import Rating from "../../../../../components/Rating/Rating";
@@ -60,6 +61,17 @@ const BookRating = ({ ratings, currentBookId, userId }: BookRatingProps) => {
       )}
     </>
   );
+};
+
+BookRating.propTypes = {
+  ratings: PropTypes.arrayOf(
+    PropTypes.shape({
+      userId: PropTypes.string.isRequired,
+      grade: PropTypes.number.isRequired,
+    })
+  ).isRequired,
+  currentBookId: PropTypes.string.isRequired,
+  userId: PropTypes.string.isRequired,
 };
 
 export default BookRating;

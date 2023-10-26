@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import starFiller from "../../assets/svg/star-filler.svg";
 import starGold from "../../assets/svg/star-selected.svg";
@@ -10,14 +11,8 @@ type RatingProps = {
   onSelect?: (selectedRating: number) => void;
 };
 
-const Rating = ({
-  size,
-  isReadOnly,
-  rating,
-  onSelect,
-}: RatingProps) => {
+const Rating = ({ size, isReadOnly, rating, onSelect }: RatingProps) => {
   const [selectedRating, setSelectedRating] = useState(rating || 0);
-
 
   useEffect(() => {
     setSelectedRating(rating || 0);
@@ -38,7 +33,9 @@ const Rating = ({
             key={`img-${star}`}
             src={star <= selectedRating ? starGold : starFiller}
             alt={star <= selectedRating ? "Filled star" : "Empty star"}
-            className={`${styles[size]} ${isReadOnly ? '' : styles['star-interaction']}`}
+            className={`${styles[size]} ${
+              isReadOnly ? "" : styles["star-interaction"]
+            }`}
             style={{ cursor: isReadOnly ? "default" : "pointer" }}
             onClick={() => handleStarClick(star)}
           />
@@ -46,6 +43,19 @@ const Rating = ({
       ))}
     </div>
   );
+};
+
+Rating.defaultProps = {
+  size: "medium",
+  isReadOnly: false,
+  rating: 0,
+};
+
+Rating.propTypes = {
+  size: PropTypes.oneOf(["small", "medium", "large"]),
+  isReadOnly: PropTypes.bool,
+  rating: PropTypes.number,
+  onSelect: PropTypes.func,
 };
 
 export default Rating;

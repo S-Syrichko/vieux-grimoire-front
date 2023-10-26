@@ -1,11 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import PropTypes from "prop-types";
 import { useNavigate, useParams } from "react-router-dom";
 import { deleteBookAPI } from "../../../../app/api";
 import useGetOneBookQuery from "../../../../lib/hooks/useGetOneBookQuery";
 import useGlobalStore from "../../../../lib/hooks/useGlobalStore";
+import styles from "./BookDetails.module.scss";
 import BookInfo from "./BookInfo/BookInfo";
 import BookRating from "./BookRating/BookRating";
-import styles from "./BookDetails.module.scss";
 
 type SingleBookProps = {
   onDelete: (bookTitle: string) => void;
@@ -72,6 +73,10 @@ const BookDetails = ({ onDelete }: SingleBookProps) => {
         </div>
       </div>
     );
+};
+
+BookDetails.propTypes = {
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default BookDetails;
