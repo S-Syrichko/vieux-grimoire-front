@@ -22,7 +22,7 @@ export const useAuthMutation = () => {
       setCookie("token", data?.token, { expires: 1 });
       updateUserId(data.userId);
       navigate("/");
-    },
+    }
   });
 
   const signupMutation = useMutation({

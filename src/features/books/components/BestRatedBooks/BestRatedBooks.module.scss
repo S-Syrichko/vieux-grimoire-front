@@ -1,23 +1,49 @@
-.bestRated{
-    margin: 50px 0 0 0;
-    position: relative;
-    .svgContainer {
-        position: absolute;
-        width: 100%;
-        overflow: hidden;
-        top: 0;
-        left: 20%;
-        .svg-content {
-          display: inline-block;
-          position: absolute;
-          top: 0;
-          left: 0;
-        }
-      }
+@import "../../../../styles/utils/mixins";
+
+.bestRated {
+  margin: 50px 0 0 0;
+  position: relative;
+  .svgContainer {
+    position: absolute;
+    width: 100%;
+    overflow: hidden;
+    top: 0;
+    left: 20%;
+    .svg-content {
+      display: inline-block;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
 }
-.gallery{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-wrap: wrap;
+.gallery {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+@include mobile-only {
+  .bestRated {
+    margin-top: 20px;
+    .svgContainer {
+      display: none;
+    }
+  }
+  .gallery {
+    justify-content: center;
+  }
+}
+
+@include tablet-only {
+  .bestRated {
+    margin-top: 20px;
+    .svgContainer {
+      display: none;
+    }
+  }
+  .gallery {
+    justify-content: center;
+  }
 }

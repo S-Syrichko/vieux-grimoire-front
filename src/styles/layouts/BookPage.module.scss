@@ -26,7 +26,9 @@
   .pageBodyMultiLayer {
     padding: 50px 110px 59px 120px;
     margin: 130px 5%;
-    @include layer-effect;
+    @include desktop {
+      @include layer-effect;
+    }
   }
   &ActionConfirm {
     display: flex;
@@ -35,6 +37,52 @@
     img {
       max-height: 350px;
       margin: 35px 0;
+    }
+  }
+}
+
+@include mobile-only {
+  .book {
+    .pageBody {
+      padding: 20px 0;
+      margin: 30px 0;
+    }
+    &ActionConfirm {
+      p{
+        margin-bottom: 0;
+      }
+      img {
+        max-height: 250px;
+        max-width: 90%;
+        margin: 10px 0;
+      }
+    }
+    .pageBodyMultiLayer {
+      padding: 20px 5px 30px 5px;
+      margin: 30px 2%;
+    }
+  }
+}
+
+@include tablet-only {
+  .book {
+    .pageBody {
+      padding: 20px 0;
+      margin: 30px 0;
+    }
+    &ActionConfirm {
+      p{
+        margin-bottom: 0;
+      }
+      img {
+        max-height: 250px;
+        max-width: 90%;
+        margin: 10px 0;
+      }
+    }
+    .pageBodyMultiLayer {
+      padding: 20px 5px 30px 5px;
+      margin: 30px 2%;
     }
   }
 }

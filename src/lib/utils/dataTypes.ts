@@ -16,6 +16,11 @@ export type Book = {
 };
 
 export type BookFormData = {
-  book: Book;
+  book: Partial<Book>;
+  file: FileList;
+};
+
+export type FormValues = {
+  book: Partial<Book>;
   file: FileList;
 };

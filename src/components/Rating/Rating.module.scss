@@ -1,22 +1,28 @@
+
 .rating {
   display: flex;
   justify-content: space-between;
-  max-width: 160px;
+  align-items: center;
+  max-width: 215px;
   
+  
+
   .small {
+    display: flex;
     width: 23px;
     height: 23px;
   }
-  
+
   .medium {
+    display: flex;
     width: 32px;
     height: 32px;
   }
-  
+
   .large {
+    display: flex;
     width: 43px;
     height: 43px;
-    
   }
   .star-interaction {
     cursor: pointer;

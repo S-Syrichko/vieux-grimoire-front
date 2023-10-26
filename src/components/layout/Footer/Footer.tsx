@@ -11,7 +11,7 @@ const Footer = () => {
         <div className={styles.adressContainer}>
           <p>8 place Jeanne d'Arc</p>
           <p>59000 Lille</p>
-          <a href="https://goo.gl/maps/7rAtEdkLEoPFS9av6">voir sur la carte</a>
+          <a href="https://goo.gl/maps/7rAtEdkLEoPFS9av6" target="_blank" rel="noreferrer">voir sur la carte</a>
         </div>
         <p className={styles.phone}>01 12 23 34 45</p>
       </div>

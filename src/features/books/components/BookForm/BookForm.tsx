@@ -19,11 +19,6 @@ type BookFormProps = {
   onValidate: (data: BookFormData) => void;
 };
 
-export type FormValues = {
-  book: Partial<Book>;
-  file: FileList;
-};
-
 const BookForm = ({
   book,
   isLoading,
@@ -36,7 +31,7 @@ const BookForm = ({
     book?.ratings.find((elt) => elt.userId === userId)?.grade ?? 0;
 
   const { register, handleSubmit, formState, control, setValue } =
-    useForm<FormValues>({
+    useForm<BookFormData>({
       defaultValues: {
         book: {
           _id: book?._id,
@@ -64,7 +59,7 @@ const BookForm = ({
     });
   };
 
-  const onSubmit = async (data: FormValues) => {
+  const onSubmit = async (data: BookFormData) => {
     if (!data.file[0] && !book) {
       alert("Veuillez ajouter une image");
       return;

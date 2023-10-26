@@ -1,4 +1,5 @@
 @import "../utils/variables";
+@import "../utils/mixins";
 
 body, #root {
   margin: 0;
@@ -38,4 +39,17 @@ h1, h3{
 }
 h3 {
   font-size: 34px;
+}
+
+@include mobile-only {
+  h1 {
+    font-size: 34px;
+  }
+  h3 {
+    font-size: 24px;
+  }
+  button{
+    font-size: 14px;
+    padding: 15px;
+  }
 }

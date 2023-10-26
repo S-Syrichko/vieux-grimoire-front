@@ -12,3 +12,20 @@
         box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.08);
       }
 }
+
+@mixin mobile-only {
+    @media screen and (min-width: 360px) and (max-width: 767px) {
+        @content;
+    }
+}
+@mixin tablet-only {
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media screen and (min-width: 1025px) {
+        @content;
+    }
+}

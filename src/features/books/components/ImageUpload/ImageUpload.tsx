@@ -1,13 +1,12 @@
-import { useState } from "react";
-import addFileIMG from "../../../../assets/images/add_file.png";
-import styles from "../../../../styles/layouts/Form.module.scss";
-import React from "react";
+import React, { useState } from "react";
 import { UseFormRegister } from "react-hook-form";
-import { FormValues } from "../BookForm/BookForm";
+import addFileIMG from "../../../../assets/images/add_file.png";
+import { BookFormData } from "../../../../lib/utils/dataTypes";
+import styles from "../../../../styles/layouts/Form.module.scss";
 
 type ImageUploadProps = {
   imageUrl?: string;
-  register: UseFormRegister<FormValues>;
+  register: UseFormRegister<BookFormData>;
 };
 
 const ImageUpload = ({ imageUrl, register }: ImageUploadProps) => {
