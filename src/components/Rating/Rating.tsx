@@ -4,7 +4,7 @@ import starFiller from "../../assets/svg/star-filler.svg";
 import starGold from "../../assets/svg/star-selected.svg";
 import styles from "./Rating.module.scss";
 
-type RatingProps = {
+export type RatingProps = {
   size: "small" | "medium" | "large";
   isReadOnly?: boolean;
   rating?: number;
@@ -43,19 +43,6 @@ const Rating = ({ size, isReadOnly, rating, onSelect }: RatingProps) => {
       ))}
     </div>
   );
-};
-
-Rating.defaultProps = {
-  size: "medium",
-  isReadOnly: false,
-  rating: 0,
-};
-
-Rating.propTypes = {
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  isReadOnly: PropTypes.bool,
-  rating: PropTypes.number,
-  onSelect: PropTypes.func,
 };
 
 export default Rating;
