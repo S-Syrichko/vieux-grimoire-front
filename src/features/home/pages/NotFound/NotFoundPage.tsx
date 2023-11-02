@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./NotFoundPage.module.scss";
-import logo from "../../../../assets/logo.svg";
+import logo from "../../../../assets/Logo.svg";
 import { Link } from "react-router-dom";
 
 const NotFoundPage = () => {

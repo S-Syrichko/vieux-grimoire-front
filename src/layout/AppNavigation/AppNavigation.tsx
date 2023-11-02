@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import useGlobalStore from "../../../lib/hooks/useGlobalStore";
+import useGlobalStore from "../../lib/hooks/useGlobalStore";
 import styles from "./AppNavigation.module.scss";
 
 const AppNavigation = () => {

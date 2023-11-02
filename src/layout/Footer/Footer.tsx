@@ -1,4 +1,4 @@
-import location from "../../../assets/images/location.png";
+import location from "../../assets/images/location.png";
 import styles from "./Footer.module.scss";
 
 const Footer = () => {

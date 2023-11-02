@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import starFiller from "../../assets/svg/star-filler.svg";
 import starGold from "../../assets/svg/star-selected.svg";

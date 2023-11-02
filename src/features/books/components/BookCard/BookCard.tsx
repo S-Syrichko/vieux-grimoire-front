@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Rating from "../../../../components/Rating/Rating";
 import { Book } from "../../../../lib/utils/dataTypes";
@@ -21,23 +20,6 @@ const BookCard = ({ book }: { book: Book }) => {
   );
 };
 
-BookCard.propTypes = {
-  book: PropTypes.shape({
-    userId: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    genre: PropTypes.string.isRequired,
-    ratings: PropTypes.arrayOf(
-      PropTypes.shape({
-        userId: PropTypes.string.isRequired,
-        grade: PropTypes.number.isRequired,
-      })
-    ).isRequired,
-    averageRating: PropTypes.number.isRequired,
-    _id: PropTypes.string,
-    imageUrl: PropTypes.string,
-  }).isRequired,
-};
+
 
 export default BookCard;

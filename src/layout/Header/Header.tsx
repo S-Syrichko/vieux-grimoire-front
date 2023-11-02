@@ -1,4 +1,4 @@
-import logo from '../../../assets/logo.svg';
+import logo from '../../assets/Logo.svg';
 import AppNavigation from '../AppNavigation/AppNavigation';
 import styles from './Header.module.scss';
 const Header = () => {
