@@ -7,6 +7,7 @@ import useGlobalStore from "../../../../lib/hooks/useGlobalStore";
 import styles from "./BookDetails.module.scss";
 import BookInfo from "./BookInfo/BookInfo";
 import BookRating from "./BookRating/BookRating";
+import Button from "../../../../components/Button/Button";
 
 type SingleBookProps = {
   onDelete: (bookTitle: string) => void;
@@ -48,18 +49,16 @@ const BookDetails = ({ onDelete }: SingleBookProps) => {
           {isAuthor && (
             <div className={styles.bookActions}>
               <p>Vous avez publié cet ouvrage, vous pouvez le :</p>
-              <button
-                className={styles.bookActionsModify}
-                onClick={() => navigate(`/books/${bookId}/update`)}
-              >
-                modifier
-              </button>
-              <button
-                className={styles.bookActionsDelete}
-                onClick={handleDelete}
-              >
-                supprimer
-              </button>
+              <div className={styles.bookActionsContainer}>
+                <div>
+                  <Button onClick={() => navigate(`/books/${bookId}/update`)}>
+                    modifier
+                  </Button>
+                </div>
+                <div className={styles.bookActionsDelete}>
+                  <Button onClick={handleDelete}>supprimer</Button>
+                </div>
+              </div>
             </div>
           )}
           <BookInfo book={data} />

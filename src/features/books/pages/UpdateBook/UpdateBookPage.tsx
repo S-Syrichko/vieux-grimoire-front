@@ -1,9 +1,10 @@
 import { useNavigate, useParams } from "react-router-dom";
 import booksPile from "../../../../assets/images/books-pile.jpg";
+import Button from "../../../../components/Button/Button";
 import useGetOneBookQuery from "../../../../lib/hooks/useGetOneBookQuery";
 import useUpdateBookMutation from "../../../../lib/hooks/useUpdateBookMutation";
-import BookForm from "../../components/BookForm/BookForm";
 import styles from "../../../../styles/layouts/BookPage.module.scss";
+import BookForm from "../../components/BookForm/BookForm";
 
 
 const UpdateBookPage = () => {
@@ -27,7 +28,7 @@ const UpdateBookPage = () => {
             <h1>Merci !</h1>
             <p>votre livre a bien été modifié</p>
             <img src={booksPile} alt="Pile de livres" />
-            <button onClick={() => navigate("/")}>Retour à l'accueil</button>
+            <Button primary onClick={() => navigate("/")}>Retour à l'accueil</Button>
           </div>
         ) : (
           <>

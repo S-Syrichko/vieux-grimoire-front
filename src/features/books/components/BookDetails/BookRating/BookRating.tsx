@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { rateBookAPI } from "../../../../../app/api";
+import Button from "../../../../../components/Button/Button";
 import Rating from "../../../../../components/Rating/Rating";
 import { Book } from "../../../../../lib/utils/dataTypes";
 import styles from "../BookDetails.module.scss";
@@ -50,7 +51,9 @@ const BookRating = ({ ratings, currentBookId, userId }: BookRatingProps) => {
             size="medium"
             onSelect={(rating) => setRating(rating)}
           />
-          <button onClick={() => mutation.mutate()}>Valider</button>
+          <Button primary onClick={() => mutation.mutate()}>
+            Valider
+          </Button>
         </div>
       ) : (
         <div className={styles.bookRating}>

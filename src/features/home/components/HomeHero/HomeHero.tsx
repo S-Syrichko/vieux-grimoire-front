@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import Button from "../../../../components/Button/Button";
 import styles from "./HomeHero.module.scss";
 
 const HomeHero = () => {
@@ -25,7 +26,11 @@ const HomeHero = () => {
       </div>
       <h1>Nos livres</h1>
       <p>à lire et à relire</p>
-      <button onClick={() => navigate("/books/add")}>+ Ajouter un livre</button>
+      <div className={styles.heroCTA}>
+        <Button primary onClick={() => navigate("/books/add")}>
+          + Ajouter un livre
+        </Button>
+      </div>
     </div>
   );
 };

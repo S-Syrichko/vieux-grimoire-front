@@ -5,6 +5,7 @@ import ReturnArrow from "../../../../components/ReturnArrow/ReturnArrow";
 import BestRatedBooks from "../../components/BestRatedBooks/BestRatedBooks";
 import BookDetails from "../../components/BookDetails/BookDetails";
 import styles from "../../../../styles/layouts/BookPage.module.scss";
+import Button from "../../../../components/Button/Button";
 
 const BookPage = () => {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ const BookPage = () => {
             <h1>{bookTitle}</h1>
             <p>a bien été supprimé</p>
             <img src={scratch} alt="Papier froissé" />
-            <button onClick={() => navigate("/")}>Retour à l'accueil</button>
+            <Button primary onClick={() => navigate("/")}>Retour à l'accueil</Button>
           </div>
         </div>
       ) : (

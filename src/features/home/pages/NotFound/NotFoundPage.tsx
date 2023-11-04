@@ -1,7 +1,7 @@
-import { useNavigate } from "react-router-dom";
-import styles from "./NotFoundPage.module.scss";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../../../assets/Logo.svg";
-import { Link } from "react-router-dom";
+import Button from "../../../../components/Button/Button";
+import styles from "./NotFoundPage.module.scss";
 
 const NotFoundPage = () => {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ const NotFoundPage = () => {
       </Link>
       <h1>4😕4</h1>
       <p>La page que vous demandez n'existe pas</p>
-      <button onClick={() => navigate("/")}>Retour à l'accueil</button>
+      <Button primary onClick={() => navigate("/")}>Retour à l'accueil</Button>
     </div>
   );
 };

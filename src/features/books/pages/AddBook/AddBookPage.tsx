@@ -5,7 +5,7 @@ import useAddBookMutation from "../../../../lib/hooks/useAddBookMutation";
 import useGlobalStore from "../../../../lib/hooks/useGlobalStore";
 import BookForm from "../../components/BookForm/BookForm";
 import styles from "../../../../styles/layouts/BookPage.module.scss";
-
+import Button from "../../../../components/Button/Button";
 
 const AddBookPage = () => {
   const { userId } = useGlobalStore();
@@ -26,7 +26,7 @@ const AddBookPage = () => {
             <h1>Merci !</h1>
             <p>votre livre a bien été publié</p>
             <img src={shelf} alt="étagère" />
-            <button onClick={() => navigate("/")}>Retour à l'accueil</button>
+            <Button primary onClick={() => navigate("/")}>Retour à l'accueil</Button>
           </div>
         ) : (
           <>

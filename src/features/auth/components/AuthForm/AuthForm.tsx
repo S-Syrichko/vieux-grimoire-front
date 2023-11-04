@@ -1,9 +1,9 @@
 import { LoadingOutlined } from "@ant-design/icons";
 import { Alert, Space, Spin } from "antd";
 import { SyntheticEvent } from "react";
+import Button from "../../../../components/Button/Button";
 import useAuthMutation from "../../../../lib/hooks/useAuthMutation";
 import styles from "../../../../styles/layouts/Form.module.scss";
-
 
 const antIcon = (
   <LoadingOutlined style={{ fontSize: 20, color: "#fff" }} spin />
@@ -19,8 +19,9 @@ const AuthForm = () => {
     handleSignup,
   } = useAuthMutation();
 
-
-  const handleFormSubmit = (e: SyntheticEvent<HTMLFormElement, SubmitEvent>) => {
+  const handleFormSubmit = (
+    e: SyntheticEvent<HTMLFormElement, SubmitEvent>
+  ) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const submitButton = e.nativeEvent.submitter as HTMLButtonElement;
@@ -52,21 +53,21 @@ const AuthForm = () => {
           )}
         </Space>
         <div className={styles.actionContainer}>
-          <button type="submit" name="login">
+          <Button primary type="submit" name="login">
             {loginMutation.isLoading ? (
               <Spin indicator={antIcon} />
             ) : (
               "Se connecter"
             )}
-          </button>
+          </Button>
           <p>ou</p>
-          <button type="submit" name="signup">
+          <Button primary type="submit" name="signup">
             {signupMutation.isLoading ? (
               <Spin indicator={antIcon} />
             ) : (
               "S'inscrire"
             )}
-          </button>
+          </Button>
         </div>
       </form>
     </div>

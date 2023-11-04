@@ -3,6 +3,7 @@ import { DevTool } from "@hookform/devtools";
 import { Alert, Space, Spin } from "antd";
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
+import Button from "../../../../components/Button/Button";
 import Rating from "../../../../components/Rating/Rating";
 import useGlobalStore from "../../../../lib/hooks/useGlobalStore";
 import { Book, BookFormData } from "../../../../lib/utils/dataTypes";
@@ -125,7 +126,7 @@ const BookForm = ({
           )}
         </Space>
         <div className={styles.actionContainer}>
-          <button type="submit" disabled={!isDirty}>
+          <Button primary type="submit" disabled={!isDirty}>
             {isLoading ? (
               <Spin indicator={antIcon} />
             ) : isDirty ? (
@@ -133,7 +134,7 @@ const BookForm = ({
             ) : (
               "En attente de changements"
             )}
-          </button>
+          </Button>
         </div>
       </form>
       <DevTool control={control} />
