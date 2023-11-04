@@ -45,21 +45,6 @@
       padding: 40px 80px;
       border-radius: 3px;
       border: 1px dashed $color-secondary;
-      button {
-        height: 60px;
-        width: 60px;
-        background-color: $color-secondary;
-        color: $color-primary;
-        border-radius: 10px;
-        font-size: 38px;
-        text-align: center;
-        padding: 0;
-        border: 1px solid $color-primary;
-        &:hover {
-          background: $color-quaternary;
-          color: $color-secondary;
-        }
-      }
       p,
       a {
         margin-left: 12px;
@@ -95,6 +80,7 @@
       padding: 0 30px;
       text-align: center;
       align-items: center;
+      margin-bottom: 10px;
       input {
         font-size: 16px;
         padding: 15px 25px;
