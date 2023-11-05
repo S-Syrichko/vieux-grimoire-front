@@ -1,6 +1,6 @@
 import { http, HttpResponse } from "msw";
 
-const apiURL = "http://localhost:4000/api";
+const apiURL = import.meta.env.VITE_BACKEND_URL;
 
 export const handlers = [
   //loginAPI

@@ -2,7 +2,7 @@ import axios from "axios";
 import { getCookie } from "typescript-cookie";
 import { BookFormData, User } from "../lib/utils/dataTypes";
 
-axios.defaults.baseURL = "http://localhost:4000/api";
+axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
 
 export const loginAPI = async ({ email, password }: User) => {
   const res = await axios.post("/auth/login", { email, password });
