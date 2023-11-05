@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import AppNavigation from "./AppNavigation";
-import useGlobalStore from "../../../lib/hooks/useGlobalStore";
+import useGlobalStore from "../../lib/hooks/useGlobalStore";
 
 describe("AppNavigation", () => {
   it("should render the correct links", () => {

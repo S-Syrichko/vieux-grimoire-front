@@ -20,7 +20,7 @@ export const addBookAPI = async (data: BookFormData) => {
   const formData = new FormData();
   formData.append("book", JSON.stringify(data.book));
   formData.append("image", data.file[0]);
-
+  
   const res = await axios.post("/books", formData, {
     headers: {
       Authorization: `Bearer ${jwt}`,

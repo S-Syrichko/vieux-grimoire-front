@@ -12,7 +12,7 @@ describe ("Header", () => {
     it("should have a logo", () => {
         renderHeader();
         const logo = screen.getByAltText("logo");
-        expect(logo).toHaveAttribute("src", expect.stringContaining("logo.svg"));
+        expect(logo).toHaveAttribute("src", expect.stringContaining("Logo.svg"));
     });
     it("should have a navigation", () => {
         renderHeader();
