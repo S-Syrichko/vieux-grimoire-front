@@ -135,6 +135,7 @@
         width: max-content;
         height: fit-content;
         transform: translateY(0);
+        text-align: center;
         a {
           margin: 0;
           &:hover {
@@ -155,7 +156,7 @@
         &:hover::after {
           cursor: pointer;
           width: 15vw;
-          transition: all 0.1s ease-in-out;
+          transition: all 0.2s ease-in-out;
         }
       }
       .slideIn_1 {
