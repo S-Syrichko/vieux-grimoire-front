@@ -1,8 +1,8 @@
 # Mon vieux Grimoire
 ## Frontend
 This project is a frontend of a book sharing platform.<br>
-The project was made from this [Figma model](https://www.figma.com/file/Snidyc45xi6qchoOPabMA9/Maquette-Mon-Vieux-Grimoir?type=design&node-id=7-95&mode=design&t=ol3tTLIpsS8XKhLf-0)<br> 
-You also can visit [backend repo](https://github.com/S-Syrichko/vieux-grimoire-back)
+The project was made from this <a href="https://www.figma.com/file/Snidyc45xi6qchoOPabMA9/Maquette-Mon-Vieux-Grimoir?type=design&node-id=7-95&mode=design&t=ol3tTLIpsS8XKhLf-0" target="_blank">Figma model</a><br> 
+You also can visit <a href="https://github.com/S-Syrichko/vieux-grimoire-back" target="_blank">backend repo</a>
 
 ## Start project
 ### With npm
