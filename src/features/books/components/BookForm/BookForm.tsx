@@ -1,5 +1,4 @@
 import { LoadingOutlined } from "@ant-design/icons";
-import { DevTool } from "@hookform/devtools";
 import { Alert, Space, Spin } from "antd";
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
@@ -31,7 +30,7 @@ const BookForm = ({
   const userRating =
     book?.ratings.find((elt) => elt.userId === userId)?.grade ?? 0;
 
-  const { register, handleSubmit, formState, control, setValue } =
+  const { register, handleSubmit, formState, setValue } =
     useForm<BookFormData>({
       defaultValues: {
         book: {
@@ -137,7 +136,6 @@ const BookForm = ({
           </Button>
         </div>
       </form>
-      <DevTool control={control} />
     </div>
   );
 };
