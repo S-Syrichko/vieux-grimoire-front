@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import scratch from "../../../../assets/images/scratch.png";
 import ReturnArrow from "../../../../components/ReturnArrow/ReturnArrow";
@@ -11,6 +11,10 @@ const BookPage = () => {
   const navigate = useNavigate();
   const [isDeleted, setIsDeleted] = useState(false);
   const [bookTitle, setBookTitle] = useState("");
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   const onDelete = (bookTitle: string) => {
     setIsDeleted(true);
